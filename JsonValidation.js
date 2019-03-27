@@ -1,11 +1,11 @@
-const jsonlint = require('jsonlint');
-
 module.exports = function validateJson(jsonvalue){
-    var json = jsonlint.parse(JSON.stringify(jsonvalue));
-    console.log(json);
-    if(json){
+    try {
+        console.log(jsonvalue);
+        JSON.parse(jsonvalue);
         return true;
-    }else{
+      } catch(err) {
+        console.error(err)
         return false;
-    }
+      }
+    
 }
