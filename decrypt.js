@@ -19,7 +19,7 @@ module.exports = async function decrypt(
   keyRingId = 'benKeyRing', // Name of the crypto key's key ring
   cryptoKeyId = 'benKey', // Name of the crypto key, e.g. "my-key"
   ciphertextFileName = './Constants.js.encrypted',
-  plaintextFileName = './Constants.js'
+  plaintextFileName = '/tmp/Contants.js'
 ) {
   const fs = require('fs');
   const {promisify} = require('util');
