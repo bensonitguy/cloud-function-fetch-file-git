@@ -15,11 +15,11 @@
 'use strict';
 
 module.exports = async function decrypt(
-  projectId = 'pwaweathertest', // Your GCP projectId
-  keyRingId = 'benKeyRing', // Name of the crypto key's key ring
-  cryptoKeyId = 'benKey', // Name of the crypto key, e.g. "my-key"
-  ciphertextFileName = './Constants.js.encrypted',
-  plaintextFileName = '/tmp/Contants.js'
+  projectId = '', // Your GCP projectId
+  keyRingId = '', // Name of the crypto key's key ring
+  cryptoKeyId = '', // Name of the crypto key, e.g. "my-key"
+  ciphertextFileName = '',
+  plaintextFileName = ''
 ) {
   const fs = require('fs');
   const {promisify} = require('util');
