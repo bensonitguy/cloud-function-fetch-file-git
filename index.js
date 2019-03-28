@@ -1,6 +1,8 @@
 const base64 = require('base-64');
 const decrypt = require('./decrypt');
 const jsonvalidator = require('./JsonValidation');
+const cloudstorageupload = require('./cloud-storage-upload');
+const createjsonfile = require('./create-json-file');
 
 exports.fetchContentGit = (
 	request,
@@ -11,7 +13,11 @@ exports.fetchContentGit = (
   	ciphertextFileName = './Constants.js.encrypted',
     plaintextFileName = '/tmp/Constants.js'
 ) => {
+	const filePath = './work.json';
+	const destination = '/admin/standard/work.json';
 	var decoded_file_content = "test";
+	const bucketName = 'pwaweathertest.appspot.com';
+
 	decrypt(projectId,keyRingId,cryptoKeyId,ciphertextFileName,plaintextFileName)
 	.then(function(){
 		const fetchgit = require('./fetch-git');
@@ -20,6 +26,19 @@ exports.fetchContentGit = (
 		decoded_file_content = base64.decode(response.data.content);
 		var jsonvalidation = jsonvalidator(decoded_file_content);
 		console.log(jsonvalidation)
+
+
+
+		if(jsonvalidation){
+			createjsonfile(decoded_file_content).then(function(){
+				cloudstorageupload(bucketName,filePath,destination).then(function(response){
+					console.log(response);
+				}).catch(function(error){
+	
+				});
+			});
+			
+		}
 		
 		
 		}).catch(function(error){
