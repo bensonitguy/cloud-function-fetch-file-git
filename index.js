@@ -5,14 +5,32 @@ const cloudstorageupload = require('./cloud-storage-upload');
 const createjsonfile = require('./create-json-file');
 
 exports.fetchContentGit = (
-	request,
-	response,
+	req,
+	resp,
 	projectId = 'pwaweathertest', // Your GCP projectId
   	keyRingId = 'benKeyRing', // Name of the crypto key's key ring
   	cryptoKeyId = 'benKey', // Name of the crypto key, e.g. "my-key"
   	ciphertextFileName = './Constants.js.encrypted',
     plaintextFileName = '/tmp/Constants.js'
 ) => {
+
+	try {
+
+		var commits_data = {}
+		commits_data = JSON.parse(req.body.payload);
+	//	var branchName = commits_data.ref.split('/').Last();
+		var commits_array = commits_data.commits;
+
+		commits_array.forEach(function(element){
+		console.log(element.modified);
+	});
+
+	} catch (error) {
+		console.log(error);
+	}
+	
+	
+
 	const filePath = './work.json';
 	const destination = '/admin/standard/work.json';
 	var decoded_file_content = "test";
@@ -47,7 +65,7 @@ exports.fetchContentGit = (
 	});
 	// will throw error in terminal but will work in Cloud Functions
 
-	response.send(decoded_file_content);
+	resp.send(decoded_file_content);
 
 	
 }
