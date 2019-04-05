@@ -1,44 +1,47 @@
 const base64 = require('base-64');
 const decrypt = require('./decrypt');
 const jsonvalidator = require('./JsonValidation');
-const createjsonfile = require('./create-json-file').default;
+const createjsonfile = require('./create-json-file');
+const config = require('./config.js');
 
 exports.fetchContentGit = (
 	req,
 	resp,
-	projectId = 'pwaweathertest', // Your GCP projectId
-  	keyRingId = 'benKeyRing', // Name of the crypto key's key ring
-  	cryptoKeyId = 'benKey', // Name of the crypto key, e.g. "my-key"
-  	ciphertextFileName = './Constants.js.encrypted',
-    plaintextFileName = '/tmp/Constants.js'
+	projectId = config.projectId, // Your GCP projectId
+  	keyRingId = config.keyRingId, // Name of the crypto key's key ring
+  	cryptoKeyId = config.cryptoKeyId, // Name of the crypto key, e.g. "my-key"
+  	ciphertextFileName = config.ciphertextFileName,
+    plaintextFileName = config.plaintextFileName
 ) => {
 
-	try {
+	// try {
 
-		var commits_data = {}
-		commits_data = JSON.parse(req.body.payload);
-	//	var branchName = commits_data.ref.split('/').Last();
-		var commits_array = commits_data.commits;
+	// 	var commits_data = {}
+	// 	commits_data = JSON.parse(req.body.payload);
+		
+	// 	var commits_array = commits_data.commits;
 
-		commits_array.forEach(function(element){
-		console.log(element.modified);
-	});
+	// 	commits_array.forEach(function(element){
+	// 	console.log(element.modified);
 
-	} catch (error) {
-		console.log(error);
-	}
+	// });
+
+	// } catch (error) {
+	// 	console.log(error);
+	// }
 	
 	
 
-	const filePath = '/tmp/work.json';
-	const destination = '/admin/standard/work.json';
-	var decoded_file_content = "test";
-	const bucketName = 'pwaweathertest.appspot.com';
+	const filePath = config.filePath;
+	const destination = config.destination;
+	var decoded_file_content = config.decoded_file_content;
+	const bucketName = config.bucketName;
+	const repository_path = config.repository_path;
 
 	decrypt(projectId,keyRingId,cryptoKeyId,ciphertextFileName,plaintextFileName)
 	.then(function(){
 		const fetchgit = require('./fetch-git');
-		fetchgit.get('/repos/bensonitguy/blogposts-with-react/contents/package.json')
+		fetchgit.get(repository_path)
 	.then(function(response){
 		decoded_file_content = base64.decode(response.data.content);
 		var jsonvalidation = jsonvalidator(decoded_file_content);
