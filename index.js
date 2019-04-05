@@ -13,20 +13,20 @@ exports.fetchContentGit = (
     plaintextFileName = '/tmp/Constants.js'
 ) => {
 
-	// try {
+	try {
 
-	// 	var commits_data = {}
-	// 	commits_data = JSON.parse(req.body.payload);
-	// //	var branchName = commits_data.ref.split('/').Last();
-	// 	var commits_array = commits_data.commits;
+		var commits_data = {}
+		commits_data = JSON.parse(req.body.payload);
+	//	var branchName = commits_data.ref.split('/').Last();
+		var commits_array = commits_data.commits;
 
-	// 	commits_array.forEach(function(element){
-	// 	console.log(element.modified);
-	// });
+		commits_array.forEach(function(element){
+		console.log(element.modified);
+	});
 
-	// } catch (error) {
-	// 	console.log(error);
-	// }
+	} catch (error) {
+		console.log(error);
+	}
 	
 	
 
