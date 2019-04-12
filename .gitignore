@@ -1,4 +1,5 @@
 node_modules/
+
 testfiles/
 
 Constants.js
@@ -6,6 +7,8 @@ Constants.js
 notes.js
 
 encrypt.js
+
+admin_standard_english.json
 
 
 

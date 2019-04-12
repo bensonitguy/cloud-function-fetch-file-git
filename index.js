@@ -1,10 +1,10 @@
 const base64 = require('base-64');
-const decrypt = require('./decrypt');
-const jsonvalidator = require('./JsonValidation');
-const createjsonfile = require('./create-json-file');
-const config = require('./config.js');
+const decrypt = require('./src/decrypt');
+const jsonvalidator = require('./src/JsonValidation');
+const createjsonfile = require('./src/create-json-file');
+const config = require('./src/config');
 
-exports.fetchContentGit = (
+exports.fetchContentGit2 = (
 	req,
 	resp,
 	projectId = config.projectId, // Your GCP projectId
@@ -38,9 +38,11 @@ exports.fetchContentGit = (
 	const bucketName = config.bucketName;
 	const repository_path = config.repository_path;
 
+
+
 	decrypt(projectId,keyRingId,cryptoKeyId,ciphertextFileName,plaintextFileName)
 	.then(function(){
-		const fetchgit = require('./fetch-git');
+		const fetchgit = require('./src/fetch-git');
 		fetchgit.get(repository_path)
 	.then(function(response){
 		decoded_file_content = base64.decode(response.data.content);
