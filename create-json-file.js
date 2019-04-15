@@ -10,7 +10,7 @@ module.exports = async function createJSONFile(json) {
         const writeFile = promisify(fs.writeFile);
 
         await writeFile('/tmp/work.json', Buffer.from(json, 'utf8')).then(function () {
-
+            console.log('completed wrirting file !');
         }).catch(function (error) {
             console.log(error);
         });

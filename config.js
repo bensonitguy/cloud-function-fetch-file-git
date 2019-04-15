@@ -11,8 +11,8 @@ config.destination = '/admin/standard/work.json';
 config.decoded_file_content = "test"; //default file content
 config.bucketName = 'pwaweathertest.appspot.com';
 
-config.repository_path = '/repos/bensonitguy/blogposts-with-react/contents/package.json';
+config.repository_path = '/repos/bensonitguy/blogposts-with-react/contents/';
 
-config.file_list = ['package.json'];
+config.file_list = ['package.json','src/index.js'];
 
 module.exports = config;
