@@ -1,8 +1,9 @@
 const base64 = require('base-64');
-const decrypt = require('./src/decrypt');
-const jsonvalidator = require('./src/JsonValidation');
-const createjsonfile = require('./src/create-json-file');
-const config = require('./src/config');
+const decrypt = require('./decrypt');
+const jsonvalidator = require('./JsonValidation');
+const createjsonfile = require('./create-json-file');
+const config = require('./config');
+const cloudstorageupload = require('./cloud-storage-upload');
 
 exports.fetchContentGit2 = (
 	req,
@@ -42,25 +43,27 @@ exports.fetchContentGit2 = (
 
 	decrypt(projectId,keyRingId,cryptoKeyId,ciphertextFileName,plaintextFileName)
 	.then(function(){
-		const fetchgit = require('./src/fetch-git');
+		const fetchgit = require('./fetch-git');
 		fetchgit.get(repository_path)
 	.then(function(response){
 		decoded_file_content = base64.decode(response.data.content);
 		var jsonvalidation = jsonvalidator(decoded_file_content);
-		console.log(jsonvalidation)
-
-
 
 		if(jsonvalidation){
+			console.log("started uploading file");
 			createjsonfile(decoded_file_content,bucketName,filePath,destination).then(function(){
-				
+				cloudstorageupload(bucketName,filePath,destination).then(function(){
+					console.log('completed file upload !');
+			}).catch(function(error){
+					console.log(error);
+			});
+			}).catch(function(error){
+				console.log("jsonvalidation"+error);
 			});
 			
 		}
-		
-		
 		}).catch(function(error){
-			//console.log(error);
+			console.log(error);
 		});
 	});
 	// will throw error in terminal but will work in Cloud Functions

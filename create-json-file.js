@@ -1,14 +1,17 @@
 const fs = require('file-system');
 const {promisify} = require('util');
-const cloudstorageupload = require('./cloud-storage-upload');
 
-module.exports = async function createJSONFile(json,bucketName,filePath,destination){
+
+module.exports = async function createJSONFile(json){
     try {
-
+    console.log(json);
     const writeFile = promisify(fs.writeFile);
 
     await writeFile('/tmp/work.json', Buffer.from(json, 'utf8')).then(function(){
-        cloudstorageupload(bucketName,filePath,destination);
+            console.log('started file upload !');
+        
+    }).catch(function(error){
+        console.log(error);
     });
     } catch (error) {
         console.log(error);

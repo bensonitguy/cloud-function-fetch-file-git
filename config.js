@@ -3,7 +3,7 @@ var config = {};
 config.projectId = 'pwaweathertest';
 config.keyRingId = 'benKeyRing'; // Name of the crypto key's key ring
 config.cryptoKeyId = 'benKey'; // Name of the crypto key, e.g. "my-key"
-config.ciphertextFileName = './src/Constants.js.encrypted';
+config.ciphertextFileName = './Constants.js.encrypted';
 config.plaintextFileName = '/tmp/Constants.js';
 
 config.filePath = '/tmp/work.json';
