@@ -1,18 +1,19 @@
 const fs = require('file-system');
-const {promisify} = require('util');
+const {
+    promisify
+} = require('util');
 
 
-module.exports = async function createJSONFile(json){
+module.exports = async function createJSONFile(json) {
     try {
-    console.log(json);
-    const writeFile = promisify(fs.writeFile);
+        console.log(json);
+        const writeFile = promisify(fs.writeFile);
 
-    await writeFile('/tmp/work.json', Buffer.from(json, 'utf8')).then(function(){
-            console.log('started file upload !');
-        
-    }).catch(function(error){
-        console.log(error);
-    });
+        await writeFile('/tmp/work.json', Buffer.from(json, 'utf8')).then(function () {
+
+        }).catch(function (error) {
+            console.log(error);
+        });
     } catch (error) {
         console.log(error);
     }

@@ -9,29 +9,29 @@ exports.fetchContentGit2 = (
 	req,
 	resp,
 	projectId = config.projectId, // Your GCP projectId
-  	keyRingId = config.keyRingId, // Name of the crypto key's key ring
-  	cryptoKeyId = config.cryptoKeyId, // Name of the crypto key, e.g. "my-key"
-  	ciphertextFileName = config.ciphertextFileName,
-    plaintextFileName = config.plaintextFileName
+	keyRingId = config.keyRingId, // Name of the crypto key's key ring
+	cryptoKeyId = config.cryptoKeyId, // Name of the crypto key, e.g. "my-key"
+	ciphertextFileName = config.ciphertextFileName,
+	plaintextFileName = config.plaintextFileName
 ) => {
 
-	// try {
+	try {
 
-	// 	var commits_data = {}
-	// 	commits_data = JSON.parse(req.body.payload);
-		
-	// 	var commits_array = commits_data.commits;
+		var commits_data = {}
+		commits_data = JSON.parse(req.body.payload);
 
-	// 	commits_array.forEach(function(element){
-	// 	console.log(element.modified);
+		var commits_array = commits_data.commits;
 
-	// });
+		commits_array.forEach(function(element){
+		console.log(element.modified);
 
-	// } catch (error) {
-	// 	console.log(error);
-	// }
-	
-	
+	});
+
+	} catch (error) {
+		console.log(error);
+	}
+
+
 
 	const filePath = config.filePath;
 	const destination = config.destination;
@@ -41,34 +41,33 @@ exports.fetchContentGit2 = (
 
 
 
-	decrypt(projectId,keyRingId,cryptoKeyId,ciphertextFileName,plaintextFileName)
-	.then(function(){
-		const fetchgit = require('./fetch-git');
-		fetchgit.get(repository_path)
-	.then(function(response){
-		decoded_file_content = base64.decode(response.data.content);
-		var jsonvalidation = jsonvalidator(decoded_file_content);
+	decrypt(projectId, keyRingId, cryptoKeyId, ciphertextFileName, plaintextFileName)
+		.then(function () {
+			const fetchgit = require('./fetch-git');
+			fetchgit.get(repository_path)
+				.then(function (response) {
+					decoded_file_content = base64.decode(response.data.content);
+					var jsonvalidation = jsonvalidator(decoded_file_content);
 
-		if(jsonvalidation){
-			console.log("started uploading file");
-			createjsonfile(decoded_file_content,bucketName,filePath,destination).then(function(){
-				cloudstorageupload(bucketName,filePath,destination).then(function(){
-					console.log('completed file upload !');
-			}).catch(function(error){
+					if (jsonvalidation) {
+						createjsonfile(decoded_file_content, bucketName, filePath, destination).then(function () {
+							cloudstorageupload(bucketName, filePath, destination).then(function () {
+								console.log('completed file upload !');
+							}).catch(function (error) {
+								console.log(error);
+							});
+						}).catch(function (error) {
+							console.log("jsonvalidation" + error);
+						});
+
+					}
+				}).catch(function (error) {
 					console.log(error);
-			});
-			}).catch(function(error){
-				console.log("jsonvalidation"+error);
-			});
-			
-		}
-		}).catch(function(error){
-			console.log(error);
+				});
 		});
-	});
 	// will throw error in terminal but will work in Cloud Functions
 
 	resp.send(decoded_file_content);
 
-	
+
 }

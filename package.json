@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "jsonlint": "^1.6.3"
   },
   "devDependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "mocha": "^6.1.3"
   }
 }

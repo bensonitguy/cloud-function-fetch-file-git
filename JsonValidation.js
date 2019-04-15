@@ -1,10 +1,9 @@
-module.exports = function validateJson(jsonvalue){
-    try {
-        JSON.parse(jsonvalue);
-        return true;
-      } catch(err) {
-        console.error(err)
-        return false;
-      }
-    
+module.exports = function validateJson(jsonvalue) {
+  try {
+    JSON.parse(jsonvalue);
+    return true;
+  } catch (err) {
+    return false;
+  }
+
 }
