@@ -6,8 +6,8 @@ config.cryptoKeyId = 'benKey'; // Name of the crypto key, e.g. "my-key"
 config.ciphertextFileName = './Constants.js.encrypted';
 config.plaintextFileName = '/tmp/Constants.js';
 
-config.filePath = '/tmp/work.json';
-config.destination = '/admin/standard/work.json';
+config.filePath = '/tmp/';
+config.destination = '/admin/standard/';
 config.decoded_file_content = "test"; //default file content
 config.bucketName = 'pwaweathertest.appspot.com';
 

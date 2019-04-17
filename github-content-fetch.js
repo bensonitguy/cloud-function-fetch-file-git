@@ -7,8 +7,8 @@ const cloudstorageupload = require('./cloud-storage-upload');
 
 module.exports = function githubfetch(repositorypath,filetoupload) {
 
-	const filePath = config.filePath;
-	const destination = config.destination;
+	const filePath = config.filePath+filetoupload;
+	const destination = config.destination+filetoupload;
 	var decoded_file_content = config.decoded_file_content;
 	const bucketName = config.bucketName;
 
