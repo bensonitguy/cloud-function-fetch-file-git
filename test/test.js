@@ -15,5 +15,14 @@ describe('Array', function() {
       assert.equal(false, jsonvalidator(json));
     });
 
+    it('valid destination',function(){
+      var valid_destination = '/src/hello/package.json';
+      var validarry = [];
+      validarry = valid_destination.split('/');
+      var count = validarry.length;
+      console.log(count);
+      assert.equal(validarry[count - 1],'package.json');
+    });
+
   });
 });

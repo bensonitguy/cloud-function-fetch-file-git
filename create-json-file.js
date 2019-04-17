@@ -4,12 +4,12 @@ const {
 } = require('util');
 
 
-module.exports = async function createJSONFile(json) {
+module.exports = async function createJSONFile(json,filename) {
     try {
         console.log(json);
         const writeFile = promisify(fs.writeFile);
-
-        await writeFile('/tmp/work.json', Buffer.from(json, 'utf8')).then(function () {
+        var fileTowrite = '/tmp/'+ filename;
+        await writeFile(fileTowrite, Buffer.from(json, 'utf8')).then(function () {
             console.log('completed wrirting file !');
         }).catch(function (error) {
             console.log(error);

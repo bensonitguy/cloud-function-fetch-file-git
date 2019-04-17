@@ -5,7 +5,7 @@ const createjsonfile = require('./create-json-file');
 const config = require('./config');
 const cloudstorageupload = require('./cloud-storage-upload');
 
-module.exports = function githubfetch(repositorypath) {
+module.exports = function githubfetch(repositorypath,filetoupload) {
 
 	const filePath = config.filePath;
 	const destination = config.destination;
@@ -23,7 +23,7 @@ module.exports = function githubfetch(repositorypath) {
 					var jsonvalidation = jsonvalidator(decoded_file_content);
 
 					if (jsonvalidation) {
-						createjsonfile(decoded_file_content).then(function () {
+						createjsonfile(decoded_file_content,filetoupload).then(function () {
                             console.log('started file upload !');
 							cloudstorageupload(bucketName, filePath, destination).then(function () {
 								console.log('completed file upload !');

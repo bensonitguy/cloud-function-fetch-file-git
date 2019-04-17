@@ -15,12 +15,15 @@ exports.fetchContentGit2 = (
 		commits_array.forEach(function(element){
 			var modified_array = element.modified;
 		if(element.modified != null && modified_array.length > 0){
+			
 			modified_array.forEach(function(filepath){
 					if(config.file_list.indexOf(filepath) != -1) {
+
+						var filetoupload = getFileNameToUpload(filepath);
+						var completeFilePath = config.repository_path + filepath;
+						console.log(filetoupload);
+						getcontentgit(completeFilePath,filetoupload);
 						
-						var filename = config.repository_path + filepath;
-						console.log(filename);
-						getcontentgit(filename);
 					}
 			});
 		}
@@ -39,5 +42,18 @@ exports.fetchContentGit2 = (
 
 	//resp.send(config.decoded_file_content);
 
+
+}
+
+function getFileNameToUpload(filepath){
+	
+		var filepath_array = filepath.split('/');
+		var array_length = filepath_array.length;
+		var filetoupload = '';
+
+		if(array_length > 0){
+			filetoupload = filepath_array[array_length - 1];
+		}
+		return filetoupload;
 
 }
