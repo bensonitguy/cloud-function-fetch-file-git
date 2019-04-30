@@ -11,8 +11,6 @@ module.exports = async function uploadFile(bucketName, filename, destination) {
     /**
      * TODO(developer): Uncomment the following lines before running the sample.
      */
-    //  const bucketName = 'pwaweathertest.appspot.com';
-    //  const filename = './Constants.js';
   
     // Uploads a local file to the bucket
     await storage.bucket(bucketName).upload(filename, {

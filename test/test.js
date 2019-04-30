@@ -1,7 +1,7 @@
 var assert = require('assert');
 
 describe('Array', function() {
-  var jsonvalidator = require('../JsonValidation');
+  var jsonvalidator = require('../json-validation');
   describe('validating jsonvalidator', function() {
     it('should return true if valid JSON ', function() {
       var json = { name : "cloudfunction" };
@@ -25,4 +25,9 @@ describe('Array', function() {
     });
 
   });
+});
+
+describe('getFileNameToUpload',function(){
+
+  
 });

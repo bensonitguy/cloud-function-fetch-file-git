@@ -1,6 +1,6 @@
 const base64 = require('base-64');
 const decrypt = require('./decrypt');
-const jsonvalidator = require('./JsonValidation');
+const jsonvalidator = require('./json-validation');
 const createjsonfile = require('./create-json-file');
 const config = require('./config');
 const cloudstorageupload = require('./cloud-storage-upload');
