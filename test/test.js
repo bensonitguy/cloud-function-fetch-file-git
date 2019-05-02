@@ -1,4 +1,4 @@
-var assert = require('assert');
+const assert = require('assert');
 
 describe('Array', function() {
   var jsonvalidator = require('../json-validation');
@@ -27,7 +27,15 @@ describe('Array', function() {
   });
 });
 
-describe('getFileNameToUpload',function(){
+describe('Get Filtered filename',function(){
+  const index = require('../index');
 
+  it('should return file name',function(){
+    assert.equal('package.json',index.getFileNameToUpload('/src/folder/package.json'));
+  });
+
+  it('should return empty string',function(){
+    assert.equal('',index.getFileNameToUpload());
+  });
   
 });

@@ -47,13 +47,17 @@ exports.fetchContentGit2 = (
 
 function getFileNameToUpload(filepath){
 	
-		var filepath_array = filepath.split('/');
-		var array_length = filepath_array.length;
+		
 		var filetoupload = '';
 
-		if(array_length > 0){
-			filetoupload = filepath_array[array_length - 1];
+		if(filepath != null){
+			var filepath_array = filepath.split('/');
+			var array_length = filepath_array.length;
+			if(array_length > 0){
+				filetoupload = filepath_array[array_length - 1];
+			}
 		}
+		
 		return filetoupload;
 
 }
